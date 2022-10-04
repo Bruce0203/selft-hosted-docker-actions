@@ -1,11 +1,16 @@
-name: Package
+name: Deployment
+
+concurrency: production
+
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
+
 jobs:
-  build:
-    runs-on: self-hosted
+  deployment:
+    runs-on: ubuntu-latest
+    environment: production
     steps:
-    - uses: actions/checkout@v1
-    - name: build packages
-      run: make all
+      - name: deploy
+        # ...deployment-specific steps
